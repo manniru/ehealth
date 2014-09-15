@@ -5,19 +5,34 @@ if(request.getParameter("login") != null) {
 	user1 = request.getParameter("user");
 	pass1 = request.getParameter("pass");
 	
+	System.out.println(user1+"=="+pass1);
+
+	
 try {
 	ResultSet rs = cn.createStatement().executeQuery("SELECT * FROM users WHERE username='"+user1+"' AND password='"+pass1+"'"); rs.next();
+	String uid = rs.getString("id");
 	user2 = rs.getString("username");
 	pass2 = rs.getString("password");
 	role = rs.getString("role");
+	session.setAttribute("uid", uid);
 	session.setAttribute("username", user1);
 	session.setAttribute("password", pass1);
 	session.setAttribute("role", role);
-	response.setStatus(response.SC_MOVED_TEMPORARILY);
-	response.setHeader("Location", "main.jsp");
+
+	if(user1.equals(user2) && pass1.equals(pass2)) {
+		response.setStatus(response.SC_MOVED_TEMPORARILY);
+		response.setHeader("Location", "main.jsp");
+	}
+
+	
+
 } catch(Exception e1) { System.out.println(e1);
+
 response.setStatus(response.SC_MOVED_TEMPORARILY);
 response.setHeader("Location", "error.jsp");
+
+
+
 }
 
 
@@ -25,7 +40,28 @@ response.setHeader("Location", "error.jsp");
 	//System.out.println(user1+"="+pass1);
 }
 %>
+<%
+boolean pass= false;
+if(request.getParameter("action") != null && request.getParameter("action").equals("password")) {
+	pass = true;
 
+}
+String username="", password = "", info="";
+
+if(request.getParameter("pass") != null) {
+	String mobileno = request.getParameter("mobileno");
+
+	try {
+			ResultSet rs = cn.createStatement().executeQuery("SELECT * FROM `users` WHERE id=(SELECT uid FROM `patient` WHERE mobileno='"+mobileno+"')"); rs.next();
+			username = rs.getString("username");
+			password = rs.getString("password");
+			info = "Your username is "+username+", and Your Password="+password;
+
+		} catch(Exception e1) { info="Mobile Number does not exit!"; }
+	
+}
+
+%>
 		
 		<!-- Main Wrapper -->
 			<div id="main-wrapper">
@@ -41,17 +77,26 @@ response.setHeader("Location", "error.jsp");
 										  </p>
 										  <form id="form1" name="form1" method="post">
 										    <table width="200" border="1" cellspacing="1" cellpadding="1">
-										      <tr>
-										        <td>Username:</td>
-										        <td><input name="user" type="text" id="user"></td>
+										    
+										      <%
+										      if(!pass) {
+										      out.println("<tr><td>Username:</td><td><input name='user' type='text' id='user'></td></tr>"+
+										    		  "<tr><td>Password:</td><td><input name='pass' type='password' id='pass'></td></tr>"+
+										    		  "<tr><td>&nbsp;</td><td><input type='submit' name='login' value='Login'></td></tr>");
+										      }
+										      
+										      else {
+										    	  out.println("<tr><td>Mobile No:</td><td><input name='mobileno' type='text'></td></tr>"+
+											    		  "<tr><td>&nbsp;</td><td><input type='submit' name='pass' value='Recover'></td></tr>");
+										      }
+										      
+										      %>
+									           <tr><td></td>
+										        <td><h4><%=info %></h4></td>
 									          </tr>
-										      <tr>
-										        <td>Password:</td>
-										        <td><input name="pass" type="password" id="pass"></td>
-									          </tr>
-										      <tr>
-										        <td>&nbsp;</td>
-										        <td><input type="submit" name="login" value="Login"></td>
+									          
+									          <tr><td></td>
+										        <td><a href="?action=password">Forgot your Password?</a></td>
 									          </tr>
 									        </table>
 									      </form>

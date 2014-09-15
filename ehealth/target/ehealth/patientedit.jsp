@@ -1,13 +1,14 @@
 <%@include file="header.jsp" %>
+<%@page import="java.sql.*"%>
 <%! String name="", dob="", gender="", address="", mobileno=""; %>
 <%! int patientid=0, height=0, weight=0;%>
 <%
-if(session.getAttribute("username") != null) {
-	String user = session.getAttribute("username").toString();
+if(session.getAttribute("uid") != null) {
+	String uid = session.getAttribute("uid").toString();
 	try {
-		ResultSet rs = cn.createStatement().executeQuery("SELECT * FROM `patients` WHERE uid=(SELECT id FROM users WHERE username='"+user+"')"); rs.next();
+		ResultSet rs = cn.createStatement().executeQuery("SELECT * FROM patient WHERE uid="+uid); rs.next();
 		patientid = rs.getInt("id");
-		name = rs.getString("name");		
+		name = rs.getString("fullname");		
 		dob = rs.getString("dob");
 		gender = rs.getString("gender");
 		height = rs.getInt("height");
@@ -17,6 +18,41 @@ if(session.getAttribute("username") != null) {
 
 	} catch(Exception e1) { System.out.println(e1); }
 }
+%>
+
+
+
+<%
+if(request.getParameter("submit") != null) {
+	String patid = request.getParameter("patid");
+	String name = request.getParameter("name");
+	String gender = request.getParameter("gender");
+	String dob = request.getParameter("dob");
+	String height = request.getParameter("height");
+	String weight = request.getParameter("weight");
+	String address = request.getParameter("address");
+	String mobileno = request.getParameter("mobileno");
+	String code = request.getParameter("code");
+	
+	System.out.println(patid);
+	
+	try {
+		String sql = "UPDATE `patient` SET `fullname`=?,`dob`=?,`gender`=?,`address`=?,`mobileno`=? WHERE id=?";
+		PreparedStatement ps = cn.prepareStatement(sql);
+		ps.setString(1, name);
+		ps.setString(2, dob);
+		ps.setString(3, gender);
+		ps.setString(4, address);
+		ps.setString(5, mobileno);
+		ps.setString(6, patid);
+		ps.executeUpdate();
+		System.out.println("Record Updated!");
+		//cn.close();
+	} catch (SQLException e) { e.printStackTrace(); }
+
+}
+
+	
 %>
 		
 		<!-- Main Wrapper -->
@@ -41,7 +77,9 @@ if(session.getAttribute("username") != null) {
 										    <table width="300" border="1" cellspacing="1" cellpadding="0">
 										      <tr>
 										        <td>Patient ID:</td>
-										        <td><input name="patientid" type="text" value="<%= patientid %>"></td>
+										        <td><input name="patientid" disabled type="text" value="<%= patientid %>">
+										        <input name='patid' type="hidden" value="<%= patientid %>">
+										        </td>
 									          </tr>
 										      <tr>
 										        <td>Patient Name:</td>
@@ -57,11 +95,11 @@ if(session.getAttribute("username") != null) {
 									          </tr>
 										      <tr>
 										        <td>Height:</td>
-										        <td><input name="height" type="text" value="<%= height %>"></td>
+										        <td><input name="height" disabled type="text" value="<%= height %>"></td>
 									          </tr>
 										      <tr>
 										        <td>Weight:</td>
-										        <td><input name="weight" type="text" value="<%= weight %>"></td>
+										        <td><input name="weight" disabled type="text" value="<%= weight %>"></td>
 									          </tr>
 										      <tr>
 										        <td>Home Address:</td>
@@ -70,6 +108,10 @@ if(session.getAttribute("username") != null) {
 										      <tr>
 										        <td>Mobile No:</td>
 										        <td><input name="mobileno" type="text" value="<%= mobileno %>"></td>
+									          </tr>
+									          <tr>
+										        <td>Enter permission code:</td>
+										        <td><input name="pcode" type="text"></td>
 									          </tr>
 										      <tr>
 										        <td>&nbsp;</td>
@@ -84,7 +126,6 @@ if(session.getAttribute("username") != null) {
 										        <td>&nbsp;</td>
 									          </tr>
 									        </table>
-										    <input type="text" name="name6">
 							            </form>
 										  <p>&nbsp;</p>
 									  </article>
@@ -129,21 +170,4 @@ if(session.getAttribute("username") != null) {
 					</div>
 				</div>
 			</div>
-
-		<!-- Footer Wrapper -->
-		<div id="footer-wrapper">
-          <footer id="footer" class="container">
-            <div class="row">
-              <div class="12u">
-                <div id="copyright">
-                  <ul class="menu">
-                    <li>&copy; AKTH eHealthcare. All rights reserved</li>
-                    <li>Design: <a href="http://html5up.net">Dgreat I.T Solutions </a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </footer>
-        </div>
-	</body>
-</html>
+<%@include file="footer.jsp" %>

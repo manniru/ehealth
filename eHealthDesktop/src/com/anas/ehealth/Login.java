@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import eHealth.Main;
+import com.anas.ehealth.dao.Dao;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;

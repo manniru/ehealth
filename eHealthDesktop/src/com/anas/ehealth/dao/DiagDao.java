@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import eHealth.Diagnosis;
+import com.anas.ehealth.Diagnosis;
 
 public class DiagDao {
 	private String protocol = "jdbc:derby:";

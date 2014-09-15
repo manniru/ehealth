@@ -1,5 +1,4 @@
-<%@page import="javax.servlet.*,
-java.awt.EventQueue,
+<%@page import="java.awt.EventQueue,
 java.awt.event.ActionListener,
 java.awt.event.ActionEvent,
 java.util.Date,
@@ -15,12 +14,18 @@ java.sql.SQLException,
 java.sql.Statement,
 java.sql.ResultSetMetaData"%>
 
+<%! public String uid = ""; %>
 
+<% if(session.getAttribute("uid")!= null) {
+	uid = session.getAttribute("uid").toString();
+}
+%>
 <%
 
 Connection cn = null;
 try { Class.forName("com.mysql.jdbc.Driver");
 cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ehealth", "root", "");
+System.out.println("connected");
 } catch(Exception e) { System.out.println(e); }
 /**
 try {
@@ -28,6 +33,19 @@ try {
 	System.out.println(rs.getString("password"));
 } catch(Exception e1) { System.out.println(e1); }
 */
+
+%>
+
+<%
+if(request.getParameter("action") != null && request.getParameter("action").equals("logout")) {
+	session.setAttribute("uid", "");
+	session.setAttribute("username", "");
+	session.setAttribute("password", "");
+	session.setAttribute("role", "");
+	
+	response.setStatus(response.SC_MOVED_TEMPORARILY);
+	response.setHeader("Location", "index.jsp");
+}
 
 %>
 <!DOCTYPE HTML>
@@ -87,11 +105,20 @@ try {
 													  <ul>
 														  <li><a href="patientview.jsp">My Page </a></li>
 														  <li><a href="patientedit.jsp">Edit Record</a></li>
-														  <li><a href="#">Request Edit Permission </a></li>
+														  <li><a href="permission.jsp">Request Edit Permission </a></li>
 													  </ul>
 												  </li>
 												  <li><a href="appointment.jsp">Appointment</a></li>
-												  <li><a href="login.jsp">Login</a></li>
+												  <%
+												   
+												  if(uid.equals("")) {
+													 out.println("<li><a href='login.jsp'>Login</a></li>");
+												  }
+												  else { 
+													  out.println("<li><a href='?action=logout'>Logout</a></li>");
+													  }
+												  %>
+												  
 												  <li><a href="contact.jsp">Contact Us </a></li>
 											  </ul>
 										  </nav>

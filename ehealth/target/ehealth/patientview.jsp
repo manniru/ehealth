@@ -1,19 +1,29 @@
 <%@include file="header.jsp" %>
-<%! String name="", dob="", gender="", address="", mobileno=""; %>
+<%! String username="", name="", dob="", gender="", address="", mobileno="", password=""; %>
 <%! int patientid=0, height=0, weight=0;%>
 <%
-if(session.getAttribute("username") != null) {
-	String user = session.getAttribute("username").toString();
+if(session.getAttribute("uid") != null) {
+	String uid = session.getAttribute("uid").toString();
+	System.out.println(uid);
 	try {
-		ResultSet rs = cn.createStatement().executeQuery("SELECT * FROM `patients` WHERE uid=(SELECT id FROM users WHERE username='"+user+"')"); rs.next();
+		ResultSet rs = cn.createStatement().executeQuery("SELECT * FROM patient WHERE uid="+uid); rs.next();
 		patientid = rs.getInt("id");
-		name = rs.getString("name");		
+		name = rs.getString("fullname");		
 		dob = rs.getString("dob");
 		gender = rs.getString("gender");
 		height = rs.getInt("height");
 		weight = rs.getInt("weight");
 		address = rs.getString("address");
 		mobileno = rs.getString("mobileno");
+
+	} catch(Exception e1) { System.out.println(e1); }
+	
+	try {
+		ResultSet rs = cn.createStatement().executeQuery("SELECT * FROM users WHERE id="+uid); rs.next();
+		patientid = rs.getInt("id");
+		username = rs.getString("username");		
+		password = rs.getString("password");
+
 
 	} catch(Exception e1) { System.out.println(e1); }
 }
@@ -79,7 +89,25 @@ if(session.getAttribute("username") != null) {
 										      <td>&nbsp;</td>
 									        </tr>
 									    </table>
-										  <p>&nbsp;</p>
+										  <h3>Account Information</h3>
+                                          <table width="300" border="1" cellspacing="1" cellpadding="0">
+										    <tr>
+										      <td>Email Address:</td>
+										      <td align="left"><strong><%= patientid %></strong></td>
+									        </tr>
+										    <tr>
+										      <td>Username:</td>
+										      <td align="left"><strong><%= username %></strong></td>
+									        </tr>
+										    <tr>
+										      <td>Password:</td>
+										      <td align="left"><strong><%= password %></strong></td>
+									        </tr>
+                                            <tr>
+										      <td>&nbsp;</td>
+										      <td>&nbsp;</td>
+									        </tr>
+									    </table>
 									  </article>
 									</div>
 								</div>
@@ -89,7 +117,7 @@ if(session.getAttribute("username") != null) {
 				</div>
 				<div class="contact_tab">
                                             <footer>
-													<a href="#" class="button alt icon fa-file-o">Continue Reading</a>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<a href="#" class="button alt icon fa-file-o">Continue Reading	</a>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<a href="#" class="button alt icon fa-file-o">Continue Reading</a>
+													<a href="medicals.jsp" class="button alt icon fa-file-o">Medical Record</a>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<a href="#" class="button alt icon fa-file-o">Continue Reading	</a>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<a href="#" class="button alt icon fa-file-o">Continue Reading</a>
 				  </footer>
       </div>
 				<div class="wrapper style3">

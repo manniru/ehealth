@@ -19,7 +19,8 @@ import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.ScrollPaneConstants;
 
-import eHealth.NewPatient;
+import com.anas.ehealth.dao.Dao;
+
 import sun.applet.Main;
 
 import java.awt.event.ActionListener;
@@ -247,7 +248,7 @@ public class ListPatients {
 		btnBackToMain.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frame.setVisible(false);
-				eHealth.Main.main(null);
+				com.anas.ehealth.Main.main(null);
 			}
 		});
 		btnBackToMain.setBounds(10, 7, 130, 23);

@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+<%@include file="header.jsp" %>
 <!--
 	ZeroFour by HTML5 UP
 	html5up.net | @n33co
@@ -107,63 +107,32 @@
 									
 											<article>
 									  <header class="major">
-									    <h3>LEFT SIDE BAR </h3>
+									    <h3>Contact us</h3>
 									  </header>
 												
 												<span class="image featured"><img src="images/pic08.jpg" alt="" /></span>
 												
-												<p>Please take a little time to give us your feedback, complain or ask questions regarding the system or hospital in general. Thank you! </p>
-												
-												<div class="left_content">
-                    <div class="center_text">
-                                <h2>Contact Form</h2>
-                                
-                     <div class="contact_tab">
-                            <div id="fields">
-                                <label for="inputname">Name:</label>
-                                <input type="text" name="Name" /><br />
-                                <label for="inputmail">Email:</label>
-                                <input type="text" name="email" /><br />
-                                <label for="inputtelefon">Mobile:</label>
-                                <input type="text" name="web" /><br />
-                                <label for="inputmessage">Message:</label>
-                                <textarea name="message" cols="28" rows="4"></textarea>
-                            </div>
-                            <div id="send">
-                              <input name="image" type="image" value="send" src="images/send.png" />
-                            </div>
-                    </div>
-                    
-                    
-                    
-               </div>
-                    
-                                      
-                    
-                    
-                </div>
-								
-									</div>
+												<p>Please take a little time to give us your feedback, complain or ask questions regarding the system or hospital in general. Thank you!</p>
+												<form name="form1" method="post" action="">
+												  <label>Name:
+												    <input type="text" name="name" id="name">
+												    Email
+<input type="text" name="email" id="email">
+												    Subject
+												    <input type="text" name="subject" id="subject">
+												    Message
+												    <textarea name="message" id="message" cols="45" rows="5"></textarea>
+												    <input type="submit" name="submit" id="submit" value="Submit">
+                                                  </label>
+						              </form>
+												<p>&nbsp;</p>
+</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="wrapper style3">
-					<div class="inner">
-						<div class="container">
-							<div class="row">
-							  <div class="4u">
-								
-									<!-- Spotlight -->
-										<section class="box spotlight">
-									      <p>You can also send an email to dgreat91@gmail.com			OR			Call us on +601123765837 
-										</section>
-							  </div>
-						  </div>
-						</div>
-					</div>
-				</div>
+				<div class="wrapper style3"></div>
 			</div>
 
 		<!-- Footer Wrapper -->

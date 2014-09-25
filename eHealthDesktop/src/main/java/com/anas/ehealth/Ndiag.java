@@ -29,10 +29,6 @@ public class Ndiag {
 	private JFrame frame;
 	private JTextField textField;
 	private JTextField textField_1;
-	/**
-	 * @wbp.nonvisual location=71,119
-	 */
-	private final JLabel label = new JLabel("New label");
 
 	/**
 	 * Launch the application.
@@ -61,12 +57,12 @@ public class Ndiag {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		label.setIcon(new ImageIcon(Ndiag.class.getResource("/com/resources/logo.fw.png")));
 		frame = new JFrame();
 		frame.setTitle("eHealth Systems (Integrated with Advanced Java Web Services Technologies)");
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/com/resources/icon.png")));
 		frame.setBounds(100, 100, 900, 700);
-		frame.setContentPane(new JLabel(new ImageIcon(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/com/resources/bg.jpg")))));		frame.getContentPane().setLayout(null);
+		//frame.setContentPane(new JLabel(new ImageIcon(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/com/resources/bg.jpg")))));		
+		frame.getContentPane().setLayout(null);
 		
 		textField = new JTextField();
 		textField.setEditable(false);
@@ -130,5 +126,13 @@ public class Ndiag {
 		label_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		label_1.setBounds(281, 107, 90, 20);
 		frame.getContentPane().add(label_1);
+		
+		JButton button_1 = new JButton("Back");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		button_1.setBounds(52, 451, 89, 50);
+		frame.getContentPane().add(button_1);
 	}
 }

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.anas.ehealth.Db;
+import com.google.gson.Gson;
 
 public class Dao {
 	Db db = new Db("jdbc:mysql://localhost/ehealth" , "root", "");
@@ -21,8 +22,14 @@ public class Dao {
 
 	public static void main(String[] args) {
 		Dao dao = new Dao();
-		Doctor doctor = dao.doctor(1);
-		dao.addDoctor(doctor);
+		Patient patient = dao.getPatient(1);
+		
+		Gson gson = new Gson();
+		String json = gson.toJson(patient);
+		System.out.println(json);
+		
+		//Doctor doctor = dao.doctor(1);
+		//dao.addDoctor(doctor);
 		
 		//Patient patient = dao.patient();
 		//dao.addPatient(patient);
@@ -364,6 +371,56 @@ public class Dao {
 			System.out.println("Pharmacist Added!");
 		} catch(Exception e) { System.out.println(e); }
 		
+	}
+	
+	public Patient getPatient(int id) {
+		Patient patient = new Patient();	
+		ResultSet rs;
+		try {
+			rs = cn.createStatement().executeQuery("SELECT * FROM patient WHERE id="+id); rs.next();
+			//int id = Integer.parseInt(rs.getString("id"));
+			String fullname = rs.getString("fullname");
+			String dob = rs.getString("dob");
+			String gender = rs.getString("gender");
+			String weight = rs.getString("weight");
+			String height = rs.getString("height");
+			String address = rs.getString("address");
+			String mobileno = rs.getString("mobileno");
+			String datereg = rs.getString("datereg");
+			String uid = rs.getString("uid");
+			
+			patient.setId(id);
+			patient.setFullname(fullname);
+			patient.setDob(dob);
+			patient.setGender(gender);
+			patient.setWeight(weight);
+			patient.setHeight(height);
+			patient.setAddress(address);
+			patient.setMobileno(mobileno);
+			patient.setDatereg(datereg);
+			patient.setUid(uid);
+			//patient.setUsername(username);
+			//patient.setPassword(password);
+			
+		} catch (SQLException e) { e.printStackTrace(); } 			
+		return patient;
+	}
+	
+	public void editPatient(Patient patient) {
+		try {
+			PreparedStatement ps = cn.prepareStatement("UPDATE patient SET fullname=?, dob=?, gender=?, weight=?, height=?, address=?, mobileno=? WHERE id = ?");
+			ps.setString(1, patient.getFullname());
+			ps.setString(2, patient.getDob());
+			ps.setString(3, patient.getGender());
+			ps.setString(4, patient.getWeight());
+			ps.setString(5, patient.getWeight());
+			ps.setString(6, patient.getAddress());
+			ps.setString(7, patient.getMobileno());
+			ps.setInt(8, patient.getId());
+			ps.executeUpdate(); 
+			System.out.println("Record updated!");
+			
+		} catch(Exception e) { System.out.println(e); }
 	}
 	
 	

@@ -29,7 +29,6 @@ public class WebServices {
 	    //PostMethod method = new PostMethod("http://search.yahoo.com/search");
 	    PostMethod method = new PostMethod("http://localhost:8080/ehealth/webservices.jsp");
 	    String type = hm.get("type").toString();
-	    System.out.println("type3="+type);
 	    //method.addParameter("p", "\"java2s\"");
 	    if(type.equals("doctor")) {
 	    method.addParameter("type", hm.get("type").toString());
@@ -57,7 +56,23 @@ public class WebServices {
 		    method.addParameter("address", hm.get("address").toString());
 		    method.addParameter("department", hm.get("department").toString());
 	    }
-		System.out.println(hm.get("department").toString());
+
+
+	    else if(type.equals("patient") && hm.get("method").toString().equals("edit")) {
+	    	
+	    	method.addParameter("type", hm.get("type").toString());
+	    	method.addParameter("method", hm.get("method").toString());
+	    	method.addParameter("id", hm.get("id").toString());
+	    	method.addParameter("type", hm.get("id").toString());
+	    	method.addParameter("fullname", hm.get("fullname").toString());
+	    	method.addParameter("gender", hm.get("gender").toString());
+	    	method.addParameter("mobileno", hm.get("mobileno").toString());
+	    	method.addParameter("dob", hm.get("dob").toString());
+	    	method.addParameter("weight", hm.get("weight").toString());
+	    	method.addParameter("height", hm.get("height").toString());
+	    	method.addParameter("address", hm.get("address").toString());
+	    	method.addParameter("datereg", hm.get("datereg").toString());
+	    }
 
 
 	    try{

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.anas.ehealth.Db;
-import com.anas.ehealth.Patient;
+//import com.anas.ehealth.Patient;
 import com.anas.ehealth.User;
 
 public class Dao {
@@ -72,8 +72,8 @@ public class Dao {
 		String fullname = "Auwal Muhammad";
 		String dob = "1980-05-03";
 		String gender = "Male";
-		int height = 165;
-		int weight = 65;
+		String height = "165";
+		String weight = "65";
 		String address = "Bukit Jalil";
 		String mobileno = "60336352527";
 		String datereg = "2014-09-07";
@@ -123,8 +123,8 @@ public class Dao {
 			ps.setString(3, patient.getFullname());
 			ps.setString(4, patient.getDob());
 			ps.setString(5, patient.getGender());
-			ps.setInt(6, patient.getWeight());
-			ps.setInt(7, patient.getHeight());
+			ps.setString(6, patient.getWeight());
+			ps.setString(7, patient.getHeight());
 			ps.setString(8, patient.getAddress());
 			ps.setString(9, patient.getMobileno());
 			ps.executeUpdate();

@@ -33,12 +33,12 @@ public class NewPrescription {
 	private final JFrame frame_1 = new JFrame();
 	private JTextField textField;
 	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
+	private JTextField pidtxt;
+	private JTextField pnametxt;
+	private JTextField drugtxt;
+	private JTextField dosagetxt;
+	private JTextField intaketxt;
+	private JTextField durationtxt;
 
 	/**
 	 * Launch the application.
@@ -134,11 +134,11 @@ public class NewPrescription {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		textField_2 = new JTextField();
-		textField_2.setEditable(false);
-		textField_2.setColumns(10);
-		textField_2.setBounds(324, 76, 222, 28);
-		frame.getContentPane().add(textField_2);
+		pidtxt = new JTextField();
+		pidtxt.setEditable(false);
+		pidtxt.setColumns(10);
+		pidtxt.setBounds(324, 76, 222, 28);
+		frame.getContentPane().add(pidtxt);
 		
 		JLabel lblEnterPrescriptionDetails = new JLabel("Enter Prescription Details");
 		lblEnterPrescriptionDetails.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -155,18 +155,18 @@ public class NewPrescription {
 		label_7.setBounds(224, 126, 90, 20);
 		frame.getContentPane().add(label_7);
 		
-		textField_3 = new JTextField();
-		textField_3.setEditable(false);
-		textField_3.setColumns(10);
-		textField_3.setBounds(324, 124, 222, 28);
-		frame.getContentPane().add(textField_3);
+		pnametxt = new JTextField();
+		pnametxt.setEditable(false);
+		pnametxt.setColumns(10);
+		pnametxt.setBounds(324, 124, 222, 28);
+		frame.getContentPane().add(pnametxt);
 		
 		JButton btnFinish = new JButton("Finish");
 		btnFinish.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnFinish.setBounds(457, 422, 89, 28);
+		btnFinish.setBounds(457, 408, 89, 42);
 		frame.getContentPane().add(btnFinish);
 		
 		JLabel lblDrugName = new JLabel("Drug Name:");
@@ -189,43 +189,43 @@ public class NewPrescription {
 		lblDuration.setBounds(224, 297, 90, 20);
 		frame.getContentPane().add(lblDuration);
 		
-		textField_4 = new JTextField();
-		textField_4.setBounds(324, 168, 222, 28);
-		frame.getContentPane().add(textField_4);
-		textField_4.setColumns(10);
+		drugtxt = new JTextField();
+		drugtxt.setBounds(324, 168, 222, 28);
+		frame.getContentPane().add(drugtxt);
+		drugtxt.setColumns(10);
 		
-		textField_5 = new JTextField();
-		textField_5.setBounds(324, 214, 222, 28);
-		frame.getContentPane().add(textField_5);
-		textField_5.setColumns(10);
+		dosagetxt = new JTextField();
+		dosagetxt.setBounds(324, 214, 222, 28);
+		frame.getContentPane().add(dosagetxt);
+		dosagetxt.setColumns(10);
 		
-		textField_6 = new JTextField();
-		textField_6.setBounds(324, 259, 222, 28);
-		frame.getContentPane().add(textField_6);
-		textField_6.setColumns(10);
+		intaketxt = new JTextField();
+		intaketxt.setBounds(324, 259, 222, 28);
+		frame.getContentPane().add(intaketxt);
+		intaketxt.setColumns(10);
 		
-		textField_7 = new JTextField();
-		textField_7.setBounds(324, 295, 222, 28);
-		frame.getContentPane().add(textField_7);
-		textField_7.setColumns(10);
+		durationtxt = new JTextField();
+		durationtxt.setBounds(324, 295, 222, 28);
+		frame.getContentPane().add(durationtxt);
+		durationtxt.setColumns(10);
 		
 		JLabel lblExtraNote = new JLabel("Extra Note:");
 		lblExtraNote.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblExtraNote.setBounds(224, 345, 90, 20);
 		frame.getContentPane().add(lblExtraNote);
 		
-		JTextArea textArea_2 = new JTextArea();
-		textArea_2.setBackground(SystemColor.control);
-		textArea_2.setTabSize(3);
-		textArea_2.setWrapStyleWord(true);
-		textArea_2.setRows(3);
-		textArea_2.setLineWrap(true);
-		textArea_2.setFont(new Font("Arial Narrow", Font.PLAIN, 14));
-		textArea_2.setBounds(324, 334, 222, 56);
-		frame.getContentPane().add(textArea_2);
+		JTextArea notestxt = new JTextArea();
+		notestxt.setBackground(SystemColor.control);
+		notestxt.setTabSize(3);
+		notestxt.setWrapStyleWord(true);
+		notestxt.setRows(3);
+		notestxt.setLineWrap(true);
+		notestxt.setFont(new Font("Arial Narrow", Font.PLAIN, 14));
+		notestxt.setBounds(324, 334, 222, 56);
+		frame.getContentPane().add(notestxt);
 		
 		JButton btnMore = new JButton("More");
-		btnMore.setBounds(224, 425, 89, 23);
+		btnMore.setBounds(224, 408, 89, 42);
 		frame.getContentPane().add(btnMore);
 		
 		JButton btnBack = new JButton("Back");
@@ -237,7 +237,7 @@ public class NewPrescription {
 				Main.main(patid);
 			}
 		});
-		btnBack.setBounds(10, 425, 75, 23);
+		btnBack.setBounds(10, 408, 75, 42);
 		frame.getContentPane().add(btnBack);
 	}
 }

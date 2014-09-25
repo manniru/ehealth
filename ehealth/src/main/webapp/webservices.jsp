@@ -16,10 +16,61 @@ java.util.Calendar,
 com.anas.ehealth.dao.Doctor,
 com.google.gson.Gson,
 com.anas.ehealth.dao.Dao,
-com.anas.ehealth.dao.User
+com.anas.ehealth.dao.User,
+com.anas.ehealth.dao.Patient
 "%>
 
 <%
+Dao dao = new Dao();
+
+if(request.getParameter("type") != null && request.getParameter("type").equals("patient") && request.getParameter("method").equals("get")) {
+	int id = Integer.parseInt(request.getParameter("id").toString());
+
+	Patient patient = dao.getPatient(id);
+	
+	Gson gson = new Gson();
+	String json = gson.toJson(patient);
+	
+	response.setContentType("application/json");
+	response.setCharacterEncoding("UTF-8");
+	response.getWriter().write(json);
+	System.out.println(json);
+}
+
+if(request.getParameter("type") != null && request.getParameter("type").equals("patient") && request.getParameter("method").equals("edit")) {
+	String type = request.getParameter("type");
+	String method = request.getParameter("method");
+	
+	int id = Integer.parseInt(request.getParameter("id"));
+	String fullname = request.getParameter("fullname");
+	String dob = request.getParameter("dob");
+	String gender = request.getParameter("gender");
+	String weight = request.getParameter("weight");
+	String height = request.getParameter("height");
+	String address = request.getParameter("address");
+	String mobileno = request.getParameter("mobileno");
+	
+	Patient patient = new Patient();
+	patient.setId(id);
+	patient.setFullname(fullname);
+	patient.setDob(dob);
+	patient.setGender(gender);
+	patient.setWeight(weight);
+	patient.setHeight(height);
+	patient.setAddress(address);
+	patient.setMobileno(mobileno);
+	
+	//String datereg = request.getParameter("datereg");
+	//String method = request.getParameter("method");
+	dao.editPatient(patient);
+}
+
+/**
+if(request.getParameter("type") != null && request.getParameter("type").equals("patient") && request.getParameter("method").equals("edit")) {
+	System.out.println("edit ppp");
+}
+*/
+/**
 if(request.getParameter("type") != null) {
 	String type = request.getParameter("type");
 	System.out.println(type);
@@ -76,16 +127,10 @@ if(request.getParameter("type") != null) {
 	Gson gson = new Gson();
 	String json = gson.toJson(dao.doctor(1));
 	System.out.println(json);
-	/**
-	String id = request.getParameter("id");
-	String output ="";
-	if(id.equals("1")) { output="Anas"; }
-	if(id.equals("2")) { output="Mannir"; }
-	out.println(type);
-	out.println(output);
-	*/
+
 	System.out.println("i received json call");
+	
 }
 
-
+*/
 %>

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50536
 File Encoding         : 65001
 
-Date: 2014-09-20 15:25:16
+Date: 2014-09-25 14:56:19
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -119,7 +119,7 @@ CREATE TABLE `patient` (
 -- Records of patient
 -- ----------------------------
 INSERT INTO `patient` VALUES ('1', 'Test One', '1990-05-03', 'Male', '62', '170', 'Endah Regal', '60122272726', '2014-09-13 14:00:44', '4');
-INSERT INTO `patient` VALUES ('2', 'Test Two', '1990-05-03', 'Male', '50', '150', 'Bukit Jalil', '6049494949338', '2014-09-13 14:00:55', '5');
+INSERT INTO `patient` VALUES ('2', 'Test Two2', '1990-05-03', 'Male', '56', '56', 'nn', '601111111111', '2014-09-25 14:52:52', '5');
 INSERT INTO `patient` VALUES ('3', 'Test Three', '1995-08-21', 'Female', '56', '155', 'Savanna Sri Pettaling', '01123765837', '2014-09-15 12:07:13', '6');
 
 -- ----------------------------
@@ -200,7 +200,7 @@ CREATE TABLE `users` (
   `email` varchar(50) DEFAULT NULL,
   `address` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of users

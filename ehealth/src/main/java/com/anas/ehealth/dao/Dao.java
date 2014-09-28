@@ -155,6 +155,30 @@ public class Dao {
 		}
 		return oo;
 	}
+	
+	public static Object[][] getPresc() {
+		Object[][] oo = null;
+	
+		try {
+		Statement st2 = cn.createStatement();
+		ResultSet r3 = st2.executeQuery("SELECT drugname,dosage,intake, duration,date FROM prescription WHERE `status`='unfiled' AND patientid=");
+		ResultSetMetaData metaData = r3.getMetaData();
+		int colCount = metaData.getColumnCount();
+		ArrayList rows = new ArrayList();
+		Object[] row = null;
+		while (r3.next()) {
+		row = new Object[colCount];
+		for (int a = 0; a < colCount; a++) {
+		row[a] = r3.getObject(a + 1);
+		}
+		rows.add(row);
+		}
+		oo = (Object[][])rows.toArray(new Object[0][0]);
+		} catch(Exception e3) { System.out.println("getData()"+e3);
+		
+		}
+		return oo;
+	}
 	/**
 	public void addUser(Users user) {
 		try {
@@ -177,7 +201,7 @@ public class Dao {
 	*/
 	public void adddiagnosis(Diagnosis diagnosis) {
 		try {
-			PreparedStatement ps = cn.prepareStatement("INSERT INTO "+ diagnosis +"(ID, DOCID, PATID, PATNAME, DIAGNOSIS, NOTES) "
+			PreparedStatement ps = cn.prepareStatement("INSERT INTO diagnosis (ID, DOCID, PATID, PATNAME, DIAGNOSIS, NOTES) "
 					+ "VALUES(?, ?, ?, ?, ?, ?)");
 			ps.setInt(1, diagnosis.getId());
 			ps.setString(2, diagnosis.getDoctorid());
@@ -221,25 +245,6 @@ public class Dao {
 		   }
 		   catch (Exception e1) { System.out.println(e1); }
 		   return simpleArray;
-	}
-	
-	public void addprescription(Prescription prescription) {
-		try {
-			PreparedStatement ps = cn.prepareStatement("INSERT INTO "+ prescription +"(ID, PHARMID, PATID, PATNAME, DRUGNAME, DOSAGE, INTAKE, DURATION, NOTE) "
-					+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
-			ps.setInt(1, prescription.getId());
-			ps.setString(2, prescription.getPharmid());
-			ps.setString(3, prescription.getPatientid());
-			ps.setString(4, prescription.getPatientname());
-			ps.setString(5, prescription.getDrugname());
-			ps.setString(6, prescription.getDosage());
-			ps.setString(7, prescription.getIntake());
-			ps.setString(8, prescription.getDuration());
-			ps.setString(9, prescription.getNote());
-			ps.executeUpdate();
-			System.out.println("Record Saved!");
-			//cn.close();
-		} catch (SQLException e) { e.printStackTrace(); }
 	}
 	
 	public Prescription getPrescription(int id, String table) {
@@ -348,7 +353,7 @@ public class Dao {
 			ps2.setInt(5, uid);
 			
 			ps2.executeUpdate();
-			System.out.println("Doctor Record Add!");
+			System.out.println("Doctor Record Added!");
 			
 			//cn.close();
 		} catch (SQLException e) { e.printStackTrace(); }
@@ -423,7 +428,153 @@ public class Dao {
 		} catch(Exception e) { System.out.println(e); }
 	}
 	
+	public void addprescription(Prescription prescription) {
+		try {
+			PreparedStatement ps = cn.prepareStatement("INSERT INTO "+ prescription +"(ID, PHARMID, PATID, PATNAME, DRUGNAME, DOSAGE, INTAKE, DURATION, NOTE) "
+					+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			ps.setInt(1, prescription.getId());
+			ps.setString(2, prescription.getPharmid());
+			ps.setString(3, prescription.getPatientid());
+			ps.setString(4, prescription.getPatientname());
+			ps.setString(5, prescription.getDrugname());
+			ps.setString(6, prescription.getDosage());
+			ps.setString(7, prescription.getIntake());
+			ps.setString(8, prescription.getDuration());
+			ps.setString(9, prescription.getNote());
+			ps.executeUpdate();
+			System.out.println("Record Saved!");
+			//cn.close();
+		} catch (SQLException e) { e.printStackTrace(); }}
+	public Prescription getPrescription(int id) {
+		Prescription prescription = new Prescription();	
+		ResultSet rs;
+		try {
+			rs = cn.createStatement().executeQuery("SELECT * FROM prescription WHERE ID="+id); rs.next();
+			prescription.setId(rs.getInt("ID"));
+			prescription.setPharmid(rs.getString("PHARMID"));
+			prescription.setPatientid(rs.getString("PATID"));
+			prescription.setPatientname(rs.getString("PATNAME"));
+			prescription.setDrugname(rs.getString("DRUGNAME"));
+			prescription.setDosage(rs.getString("DOSAGE"));
+			prescription.setIntake(rs.getString("INTAKE"));
+			prescription.setDuration(rs.getString("DURATION"));
+			prescription.setNote(rs.getString("NOTE"));	
+		} catch (SQLException e) { e.printStackTrace(); } 
+
+			
+		return prescription;
+	}
 	
+	public String[] getPrescriptions(Connection cn, String fl) {
+		String[] simpleArray = null;
+		   try { Statement st = cn.createStatement(); 
+		   	ResultSet rs = st.executeQuery("SELECT "+fl+" FROM prescription ORDER BY id");
+		   	
+		   	List<String> ls = new ArrayList();
+		   	while(rs.next()) { ls.add(rs.getString(fl)); }
+		     
+		     simpleArray = new String[ls.size()];
+		     ls.toArray(simpleArray);
+		   }
+		   catch (Exception e1) { System.out.println(e1); }
+		   return simpleArray;
+	}
+	
+	public Object[][] data() {
+		Object[][] oo = null;
+	
+		try {
+		Statement st2 = cn.createStatement();
+		ResultSet r3 = st2.executeQuery("SELECT * FROM prescription");
+		ResultSetMetaData metaData = r3.getMetaData();
+		int colCount = metaData.getColumnCount();
+		ArrayList rows = new ArrayList();
+		Object[] row = null;
+		while (r3.next()) {
+		row = new Object[colCount];
+		for (int a = 0; a < colCount-1; a++) {
+		row[a] = r3.getObject(a + 1);
+		}
+		rows.add(row);
+		}
+		oo = (Object[][])rows.toArray(new Object[0][0]);
+		} catch(Exception e3) { System.out.println("regData()"+e3);
+		
+		}
+		return oo;
+	}
+	
+	public Diagnosis getdiagnosis(int id) {
+		Diagnosis diagnosis = new Diagnosis();	
+		ResultSet rs;
+		try {
+			rs = cn.createStatement().executeQuery("SELECT * FROM diagnosis WHERE ID="+id); rs.next();
+			diagnosis.setId(rs.getInt("ID"));
+			diagnosis.setDoctorid(rs.getString("DOCID"));
+			diagnosis.setPatientid(rs.getString("PATID"));
+			diagnosis.setPatientname(rs.getString("PATNAME"));
+			diagnosis.setDiagnosis(rs.getString("DIAGNOSIS"));
+			diagnosis.setNotes(rs.getString("NOTES"));
+		} catch (SQLException e) { e.printStackTrace(); } 
+
+			
+		return diagnosis;
+	}
+	
+	public String[] getDiagnosis(Connection cn, String fl) {
+		String[] simpleArray = null;
+		   try { Statement st = cn.createStatement(); 
+		   	ResultSet rs = st.executeQuery("SELECT "+fl+" FROM diagnosis ORDER BY id");
+		   	
+		   	List<String> ls = new ArrayList();
+		   	while(rs.next()) { ls.add(rs.getString(fl)); }
+		     
+		     simpleArray = new String[ls.size()];
+		     ls.toArray(simpleArray);
+		   }
+		   catch (Exception e1) { System.out.println(e1); }
+		   return simpleArray;
+	}
+	
+	public Object[][] data1() {
+		Object[][] oo = null;
+	
+		try {
+		Statement st2 = cn.createStatement();
+		ResultSet r3 = st2.executeQuery("SELECT * FROM diagnosis");
+		ResultSetMetaData metaData = r3.getMetaData();
+		int colCount = metaData.getColumnCount();
+		ArrayList rows = new ArrayList();
+		Object[] row = null;
+		while (r3.next()) {
+		row = new Object[colCount];
+		for (int a = 0; a < colCount-1; a++) {
+		row[a] = r3.getObject(a + 1);
+		}
+		rows.add(row);
+		}
+		oo = (Object[][])rows.toArray(new Object[0][0]);
+		} catch(Exception e3) { System.out.println("regData()"+e3);
+		
+		}
+		return oo;
+	}
+	public void editDiagnosis(Diagnosis diagnosis) {
+		int pid = 0;
+		try { pid = Integer.parseInt(diagnosis.getPatientid()); } catch(Exception e) { System.out.println(e); }
+		
+		try {
+			PreparedStatement ps = cn.prepareStatement("UPDATE `diagnosis` SET `doctorid`=?,`patientname`=?,`diagnosis`=?,`notes`=? WHERE patientid=?");
+			ps.setString(1, diagnosis.getDoctorid());
+			ps.setString(2, diagnosis.getPatientname());
+			ps.setString(3, diagnosis.getDiagnosis());
+			ps.setString(4, diagnosis.getNotes());
+			ps.setInt(5, pid);
+			ps.executeUpdate(); 
+			System.out.println("Diagnosis updated!");
+			
+		} catch(Exception e) { System.out.println(e); }
+	}
 }
 
 

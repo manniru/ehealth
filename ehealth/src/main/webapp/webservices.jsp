@@ -17,12 +17,19 @@ com.anas.ehealth.dao.Doctor,
 com.google.gson.Gson,
 com.anas.ehealth.dao.Dao,
 com.anas.ehealth.dao.User,
-com.anas.ehealth.dao.Patient
+com.anas.ehealth.dao.Patient,
+com.anas.ehealth.dao.Prescription,
+com.anas.ehealth.dao.Diagnosis
 "%>
+<%
+String tp = request.getParameter("type");
+String mt = request.getParameter("method");
+//System.out.println(tp+"=="+mt);
 
+%>
 <%
 Dao dao = new Dao();
-
+//GET PATIENT
 if(request.getParameter("type") != null && request.getParameter("type").equals("patient") && request.getParameter("method").equals("get")) {
 	int id = Integer.parseInt(request.getParameter("id").toString());
 
@@ -36,7 +43,7 @@ if(request.getParameter("type") != null && request.getParameter("type").equals("
 	response.getWriter().write(json);
 	System.out.println(json);
 }
-
+//EDIT PATIENT
 if(request.getParameter("type") != null && request.getParameter("type").equals("patient") && request.getParameter("method").equals("edit")) {
 	String type = request.getParameter("type");
 	String method = request.getParameter("method");
@@ -64,12 +71,56 @@ if(request.getParameter("type") != null && request.getParameter("type").equals("
 	//String method = request.getParameter("method");
 	dao.editPatient(patient);
 }
-
-/**
-if(request.getParameter("type") != null && request.getParameter("type").equals("patient") && request.getParameter("method").equals("edit")) {
-	System.out.println("edit ppp");
+// EDIT PRESCRIPTION
+if(request.getParameter("type") != null && request.getParameter("type").equals("prescription") && request.getParameter("method").equals("add")) {
+	String type = request.getParameter("type");
+	String method = request.getParameter("method");
+	
+	String patientid = request.getParameter("patientid");
+	String patientname = request.getParameter("patientname");
+	String drugname = request.getParameter("drugname");
+	String dosage = request.getParameter("dosage");
+	String intake = request.getParameter("intake");
+	String duration = request.getParameter("duration");
+	String notes = request.getParameter("notes");
+	
+	Prescription prs = new Prescription();
+	prs.setPatientid(patientid);
+	prs.setDrugname(drugname);
+	prs.setDosage(dosage);
+	prs.setIntake(intake);
+	prs.setDuration(duration);
+	prs.setNote(notes);
+	
+	dao.addprescription(prs);
 }
-*/
+
+// EDIT DIAGNOSIS
+if(request.getParameter("type") != null && request.getParameter("type").equals("diagnosis") && request.getParameter("method").equals("edit")) {
+		String type = request.getParameter("type");
+		String method = request.getParameter("method");
+		
+		String pid = (request.getParameter("pid")).toString();
+		String pname = request.getParameter("pname");
+		String doctorid = request.getParameter("did");
+		String diagnosis = request.getParameter("diagnosis");
+		String notes = request.getParameter("notes");
+		
+		
+		Diagnosis diag = new Diagnosis();
+		
+		diag.setPatientid(pid);
+		diag.setPatientname(pname);
+		diag.setDoctorid(doctorid);
+		diag.setDiagnosis(diagnosis);
+		diag.setNotes(notes);
+		
+		
+		dao.editDiagnosis(diag);
+		
+
+}
+
 /**
 if(request.getParameter("type") != null) {
 	String type = request.getParameter("type");

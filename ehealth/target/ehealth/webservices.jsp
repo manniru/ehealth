@@ -17,14 +17,17 @@ com.anas.ehealth.dao.Doctor,
 com.google.gson.Gson,
 com.anas.ehealth.dao.Dao,
 com.anas.ehealth.dao.User,
-com.anas.ehealth.dao.Patient
+com.anas.ehealth.dao.Patient,
+com.anas.ehealth.dao.Prescription,
+com.anas.ehealth.dao.Diagnosis
 "%>
 
 <%
-if(request.getParameter("type") != null && request.getParameter("type").equals("patient")) {
+Dao dao = new Dao();
+//GET PATIENT
+if(request.getParameter("type") != null && request.getParameter("type").equals("patient") && request.getParameter("method").equals("get")) {
 	int id = Integer.parseInt(request.getParameter("id").toString());
 
-	Dao dao = new Dao();
 	Patient patient = dao.getPatient(id);
 	
 	Gson gson = new Gson();
@@ -35,6 +38,84 @@ if(request.getParameter("type") != null && request.getParameter("type").equals("
 	response.getWriter().write(json);
 	System.out.println(json);
 }
+//EDIT PATIENT
+if(request.getParameter("type") != null && request.getParameter("type").equals("patient") && request.getParameter("method").equals("edit")) {
+	String type = request.getParameter("type");
+	String method = request.getParameter("method");
+	
+	int id = Integer.parseInt(request.getParameter("id"));
+	String fullname = request.getParameter("fullname");
+	String dob = request.getParameter("dob");
+	String gender = request.getParameter("gender");
+	String weight = request.getParameter("weight");
+	String height = request.getParameter("height");
+	String address = request.getParameter("address");
+	String mobileno = request.getParameter("mobileno");
+	
+	Patient patient = new Patient();
+	patient.setId(id);
+	patient.setFullname(fullname);
+	patient.setDob(dob);
+	patient.setGender(gender);
+	patient.setWeight(weight);
+	patient.setHeight(height);
+	patient.setAddress(address);
+	patient.setMobileno(mobileno);
+	
+	//String datereg = request.getParameter("datereg");
+	//String method = request.getParameter("method");
+	dao.editPatient(patient);
+}
+
+if(request.getParameter("type") != null && request.getParameter("type").equals("prescription") && request.getParameter("method").equals("add")) {
+	String type = request.getParameter("type");
+	String method = request.getParameter("method");
+	
+	String patientid = request.getParameter("patientid");
+	String patientname = request.getParameter("patientname");
+	String drugname = request.getParameter("drugname");
+	String dosage = request.getParameter("dosage");
+	String intake = request.getParameter("intake");
+	String duration = request.getParameter("duration");
+	String notes = request.getParameter("notes");
+	
+	Prescription prs = new Prescription();
+	prs.setPatientid(patientid);
+	prs.setDrugname(drugname);
+	prs.setDosage(dosage);
+	prs.setIntake(intake);
+	prs.setDuration(duration);
+	prs.setNote(notes);
+	
+	dao.addprescription(prs);
+}
+
+
+if(request.getParameter("type") != null && request.getParameter("type").equals("diagnosis") && request.getParameter("method").equals("edit")) {
+	if(request.getParameter("type") != null && request.getParameter("type").equals("patient") && request.getParameter("method").equals("edit")) {
+		String type = request.getParameter("type");
+		String method = request.getParameter("method");
+		
+		String patientid = (request.getParameter("patientid")).toString();
+		String patientname = request.getParameter("patientname");
+		String doctorid = request.getParameter("doctorid");
+		String diagnosis = request.getParameter("diagnosis");
+		String notes = request.getParameter("notes");
+		
+		Diagnosis diag = new Diagnosis();
+		
+		diag.setPatientid(patientid);
+		diag.setPatientname(patientname);
+		diag.setDoctorid(doctorid);
+		diag.setDiagnosis(diagnosis);
+		diag.setNotes(notes);
+		
+		
+		dao.editDiagnosis(diag);
+	}
+
+}
+
 /**
 if(request.getParameter("type") != null) {
 	String type = request.getParameter("type");

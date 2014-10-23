@@ -13,6 +13,7 @@ public class Patient {
 	public String height;
 	public String address;
 	public String mobileno;
+	public String email;
 	public String datereg;
 	public int getId() {
 		return id;
@@ -85,6 +86,12 @@ public class Patient {
 	}
 	public void setMobileno(String mobileno) {
 		this.mobileno = mobileno;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public String getDatereg() {
 		return datereg;

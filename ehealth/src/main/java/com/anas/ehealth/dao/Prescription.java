@@ -10,6 +10,8 @@ public class Prescription {
 	public String intake;
 	public String duration;
 	public String note;
+	public String status;
+	
 	public int getId() {
 		return id;
 	}
@@ -64,7 +66,12 @@ public class Prescription {
 	public void setNote(String note) {
 		this.note = note;
 	}
-
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 }
 	

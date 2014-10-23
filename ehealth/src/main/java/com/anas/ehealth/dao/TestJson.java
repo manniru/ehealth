@@ -7,6 +7,7 @@ import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.SimpleDateFormat;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -14,7 +15,7 @@ import com.google.gson.GsonBuilder;
 public class TestJson {
 
 	public static void main(String[] args) {
-		
+		SimpleDateFormat ft = new SimpleDateFormat("yyyyMMDD.hhmmss");
 		GsonBuilder gsonBuilder = new GsonBuilder();
 	    gsonBuilder.registerTypeAdapter(Patient.class, new PatientDeserializer());
 		Gson gson = gsonBuilder.create();

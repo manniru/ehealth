@@ -4,12 +4,10 @@ public class User {
 	int id;
 	String username;
 	String password;
+	String email;
 	String role;
 	String fullname;
-	String department;
-	String mobileno;
-	String email;
-	String address;
+	String access;
 	public int getId() {
 		return id;
 	}
@@ -28,6 +26,12 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public String getRole() {
 		return role;
 	}
@@ -40,29 +44,12 @@ public class User {
 	public void setFullname(String fullname) {
 		this.fullname = fullname;
 	}
-	public String getDepartment() {
-		return department;
+	public String getAccess() {
+		return access;
 	}
-	public void setDepartment(String department) {
-		this.department = department;
+	public void setAccess(String access) {
+		this.access = access;
 	}
-	public String getMobileno() {
-		return mobileno;
-	}
-	public void setMobileno(String mobileno) {
-		this.mobileno = mobileno;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
+	
+	
 }

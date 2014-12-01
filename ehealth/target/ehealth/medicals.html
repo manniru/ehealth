@@ -62,7 +62,7 @@
 													</li>
 													<li><a href="left-sidebar.html">Left Sidebar</a></li>
 													<li><a href="right-sidebar.html">Right Sidebar</a></li>
-													<li class="current_page_item"><a href="no-sidebar.html">Mobile doctor</a></li>
+													<li class="current_page_item"><a href="no-sidebar.html">No Sidebar</a></li>
 												</ul>
 											</nav>
 									
@@ -85,19 +85,53 @@
 
 										<!-- Content -->
 									
-									  <article>
-										<header class="major">
-												  <p>ENTER PATIENT id to contineu...</p>
-										</header>
-										<form name="form2" method="post" action="">
-										  <label>Patient ID:
-										    <input type="text" name="pid" id="pid">
-										    <br>
-										    <input type="submit" name="contineu" id="contineu" value="Proceed &gt;&gt;">
-										  </label>
-										</form>
-										<h2>&nbsp;</h2>
-									  </article>
+											<article>
+												<header class="major">
+													<h2>Medical Records</h2>
+													<p>All informations are as at the previous visit.</p>
+												</header>
+												
+												<span class="image featured"><img src="images/pic08.jpg" alt="" /></span>
+												
+											  <h2>Medical records contain sensitive information and should not be shared with third parties.</h2>
+												<h2>If you are in this page mistakingly, please click close.</h2>
+												<p>&nbsp;</p>
+												
+												 <table width="300" border="1" cellspacing="1" cellpadding="0">
+										    <tr>
+										      <td>Patient ID:</td>
+										      <td align="left"><strong><%= patientid %></strong></td>
+									        </tr>
+										    <tr>
+										      <td>Patient Name:</td>
+										      <td align="left"><strong><%= name %></strong></td>
+									        </tr>
+                                            <tr>
+										      <td>Last Seen Physician:</td>
+										      <td align="left"><strong><%= address %></strong></td>
+									        </tr>
+										    <tr>
+										      <td>Most Recent Diagnosis:</td>
+										      <td align="left"><strong><%= gender %></strong></td>
+									        </tr>
+										    <tr>
+										      <td>Most Recent Prescription:</td>
+										      <td align="left"><strong><%= dob %></strong></td>
+									        </tr>
+										    <tr>
+										      <td>Conclusions and Extras:</td>
+										      <td align="left"><strong><%= height %></strong></td>
+									        </tr>
+										    <tr>
+										      <td>Last visit:</td>
+										      <td align="left"><strong><%= mobileno %></strong></td>
+									        </tr>
+										    <tr>
+										      <td>&nbsp;</td>
+										      <td align="left">&nbsp;</td>
+									        </tr>
+										 </table>
+											</article>
 								
 									</div>
 								</div>

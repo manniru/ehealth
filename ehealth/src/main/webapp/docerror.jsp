@@ -11,7 +11,7 @@
 								<div class="row">
 									<div class="12u">
 										<header class="first major">
-										  <p align="center" class="style2">We provide.... </p>
+										  <p align="center" class="style2">INVALID USERNAME OR PASSWORD!, <a href="doclogin.jsp">CLICK HERE TO RE-LOGIN</a>. </p>
 										</header>
 									</div>
 								</div>
@@ -26,7 +26,7 @@
 									</div>
 									<div class="4u">
 									  <section>
-											<a href="doclogin.jsp" class="image featured"><img src="images/pic02.jpg" alt="" /></a>
+											<a href="#" class="image featured"><img src="images/pic02.jpg" alt="" /></a>
 									    <header class="second icon fa-cog">									      
 									      <h3>eHealthcare Facilities</h3>
 								        </header>
@@ -51,4 +51,21 @@
 					</div>
 				</div>
 	</div>
-			<%@include file="footer.jsp" %>
+			<!-- Footer Wrapper -->
+			<div id="footer-wrapper">
+				<footer id="footer" class="container">
+				  <div class="row">
+						<div class="12u">
+							<div id="copyright">
+								<ul class="menu">
+									<li>&copy; AKTH eHealthcare System. All rights reserved</li>
+									<li>Design: <a href="http://html5up.net">Dgreat I.T Solutions </a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</footer>
+			</div>
+
+	</body>
+</html>

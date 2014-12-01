@@ -1,3 +1,26 @@
+<%@include file="header.jsp" %>
+<%
+if(request.getParameter("submit") != null) {
+	String patientid="", patientname="", mobileno="";
+    
+	patientid = request.getParameter("pid");
+	
+try {
+	ResultSet rs = cn.createStatement().executeQuery("SELECT * FROM patient WHERE id="+patientid); rs.next();
+	
+	patientname = rs.getString("fullname");
+	mobile = rs.getString("mobileno");
+	patid = rs.getString("id");
+    
+	session.setAttribute("patid", patid);
+	session.setAttribute("patientname", patientname);
+	session.setAttribute("mobileno", mobileno);
+	}catch(Exception e1) { out.println("Patient Does not Exist");} 
+    
+    response.setStatus(response.SC_MOVED_TEMPORARILY);
+	response.setHeader("Location", "diagnosis.jsp");
+}
+
 <!DOCTYPE HTML>
 <!--
 	ZeroFour by HTML5 UP
